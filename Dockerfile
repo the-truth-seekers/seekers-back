@@ -1,12 +1,12 @@
-FROM python:3.11
+FROM python:3.11-slim
 
 WORKDIR /app
 
 COPY . .
 
-RUN chmod 777 /app/installODBC.sh 
-RUN /app/installODBC.sh
-RUN pip install --no-cache-dir -r requirements.txt
+RUN chmod 777 /app/installODBC.sh && \
+    /app/installODBC.sh && \
+    pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
 
