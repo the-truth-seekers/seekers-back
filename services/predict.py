@@ -13,3 +13,11 @@ class Predict:
         resultado = modelo_predicao.predict(texto_vetorizado)
 
         return resultado
+
+    @staticmethod
+    def predict_news_proba(texto):
+        texto_tratado = clean_text(texto)
+        texto_vetorizado = modelo_vect.transform([texto_tratado])
+        resultado = modelo_predicao.predict_proba(texto_vetorizado)
+
+        return resultado
