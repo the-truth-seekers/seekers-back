@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-$ph404tm9$8_t^oqc$gg7icj)n(hle=x$1y@ba73m*fq2x2+do
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['back', 'localhost']
+ALLOWED_HOSTS = ['back', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -102,11 +102,10 @@ DATABASES = {
 
             'OPTIONS': {
                 'driver': 'ODBC Driver 18 for SQL Server',
-                "extra_params": 'Encrypt=yes;TrustServerCertificate=no;Connection Timeout=300;Authentication=ActiveDirectoryPassword',
+                "extra_params": 'Encrypt=yes;TrustServerCertificate=no;Connection Timeout=300;',
             },
         },
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
