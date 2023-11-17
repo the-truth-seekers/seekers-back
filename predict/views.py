@@ -1,31 +1,22 @@
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
-from services.predict import Predict
+from predict.services.predict import Predict
 import json
 
 
 @api_view(['POST'])
 def predicao(request):
+    print(request.method)
     if request.method == 'POST':
+        modelo = request.GET.get('modelo', 'rnn')
         data = json.loads(request.body)
         texto = data.get('texto')
 
-        predict = Predict.predict_news(texto).tolist()[0]
-
-        prob = Predict.predict_news_proba(texto)[0]
-        probabilidades = {
-            'fake': prob[0],
-            'true': prob[1]
-        }
-
-        resposta_analisada = None
-
-        if probabilidades['fake'] > 0.7:
-            resposta_analisada = False
-
-        if probabilidades['true'] > 0.7:
-            resposta_analisada = True
-
-        return JsonResponse({'resultado': predict, 'resposta_analisada': resposta_analisada, 'probabilidades': probabilidades})
+        if modelo == 'rnn':
+            return Predict.predict_rnn(texto)
+        elif modelo == 'randomForest':
+            return Predict.predict_rf(texto)
+        else:
+            return JsonResponse({'error': 'Modelo não reconhecido'}, status=405)
 
     return JsonResponse({'error': 'Método não permitido'}, status=405)
