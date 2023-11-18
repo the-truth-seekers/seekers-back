@@ -4,9 +4,6 @@ from predict.services.helpers import clean_text, limpar_texto, lematize_sentence
 from utils.modelos import modelo_vect, modelo_predicao_rf, modelo_tokenizer, modelo_pad_sequences, modelo_predicao_rnn
 
 
-# from keras.preprocessing.sequence import pad_sequences
-
-
 class Predict:
     def __init__(self):
         pass
