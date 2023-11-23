@@ -21,6 +21,8 @@ RUN ACCEPT_EULA=Y apt-get install -y mssql-tools18
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN python -m spacy download pt_core_news_sm
+
 EXPOSE 8000
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
